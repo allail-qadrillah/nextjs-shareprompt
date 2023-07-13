@@ -33,7 +33,7 @@ const Feed = () => {
       setPosts(data)
     }
     fetchPosts()
-  })
+  }, [])
 
   return (
     <section className='feed'>
