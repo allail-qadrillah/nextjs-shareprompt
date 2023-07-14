@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
 
 import Profile from "@components/Profile"
 
@@ -11,10 +11,13 @@ function MyProfile() {
   const { data: session } = useSession()
   const [Posts, setPosts] = useState([])
   const searchParams = useSearchParams()
-  const userId = searchParams.get('id')
+  const pathName = usePathname()
 
+  const userId = searchParams.get('id')
   // apakah id session dengan id params sama?
-  if (userId === session?.user.id) {
+  // true = user dapat edit dan delete
+  // false = user hanya liat doang
+  if (userId === session?.user.id || (!userId && pathName === '/profile')) {
     useEffect(() => {
       const fetchPosts = async () => {
         const response = await fetch(`/api/users/${session?.user.id}/posts`)
@@ -32,10 +35,9 @@ function MyProfile() {
         setPosts(data)
       }
       if (session?.user.id) fetchPosts()
+
     }, [session])
   }
-  // true = user dapat edit dan delete
-  // false = user hanya liat doang
 
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`)
