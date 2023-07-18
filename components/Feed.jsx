@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import PromptCard from "./PromptCard"
 import { useRouter } from "next/navigation"
+import { connectToRealm } from "@utils/realm"
+import * as Realm from "realm-web"
 
 const PromptCardList = ({ data, handleTagClick, handleProfileClick }) => {
   return (
@@ -22,13 +24,32 @@ const PromptCardList = ({ data, handleTagClick, handleProfileClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('')
   const [posts, setPosts] = useState([])
+  const [post, setPost] = useState([])
   const router = useRouter()
+  
 
   const handleSearchChange = (e) => {
 
   }
 
-  useEffect(() => {
+  useEffect(async() => {
+    // connectToRealm()
+
+    // const app = new Realm.App({ id: 'promptopia-ayvgj' });
+    // const credentials = Realm.Credentials.anonymous();
+
+    // try {
+    //   const user = await app.logIn(credentials);
+
+    //   const searchPrompts = await user.functions.searchPrompt("share")
+    //   setPost(() => searchPrompts)
+    //   console.log(post)
+    //   console.log(searchPrompts)
+
+    // } catch (err) {
+    //   console.error("Failed to log in", err);
+    // }
+
     const fetchPosts = async () => {
       const response = await fetch('/api/prompt')
       const data = await response.json()

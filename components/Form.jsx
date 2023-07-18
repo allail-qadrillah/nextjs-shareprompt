@@ -12,8 +12,22 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
       <form
         onSubmit={handleSubmit}
-        className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
+        className='mt-4 w-full max-w-2xl flex flex-col gap-2 glassmorphism'
       >
+      
+        <label >
+          <span className='font-satoshi font-semibold text-base text-gray-700'
+          >Title {' '}
+            {/* <span className='font-normal'>(#product #ai)</span> */}
+          </span>
+        </label>
+        <input
+          value={post.title}
+          onChange={(e) => setPost({ ...post, title: e.target.value })}
+          placeholder='what is the use of your prompt?'
+          required
+          className='form_input'
+        />
       
         <label >
           <span className='font-satoshi font-semibold text-base text-gray-700'
@@ -30,13 +44,13 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         <label >
           <span className='font-satoshi font-semibold text-base text-gray-700'
           >Tag {' '}
-            <span className='font-normal'>(#product #ai)</span>
+            {/* <span className='font-normal'>(#product #ai)</span> */}
           </span>
         </label>
         <input 
           value={post.tag}
           onChange={(e) => setPost({ ...post, tag: e.target.value })}
-          placeholder='#tag'
+          placeholder='What is your prompt about?'
           required
           className='form_input'
         />

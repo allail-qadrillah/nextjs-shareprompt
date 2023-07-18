@@ -6,7 +6,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
     - search by tag
     - search by username
 [] implement Click on Tag
-[] implement View other Profiles
+[x] implement View other Profiles
+[] implement Lazy Loading
+[] Add Judul Prompt
 
 
 ## Getting Started

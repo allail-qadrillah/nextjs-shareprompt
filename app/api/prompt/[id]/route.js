@@ -17,7 +17,7 @@ export const GET = async (request, { params }) => {
 
 // PATCH ( update )
 export const PATCH = async (request, { params }) => {
-  const { prompt, tag } = await request.json()
+  const { title, prompt, tag } = await request.json()
 
   try {
     await connectToDB()
@@ -26,6 +26,7 @@ export const PATCH = async (request, { params }) => {
 
     if(!existingPrompt) return new Response("Prompt not found", {status:404})
 
+    existingPrompt.title = title
     existingPrompt.prompt = prompt
     existingPrompt.tag = tag
 
